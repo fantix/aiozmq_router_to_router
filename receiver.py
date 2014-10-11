@@ -26,8 +26,8 @@ class Receiver():
         self.gateway_router, _ = yield from aiozmq.create_zmq_connection(
             lambda: _GatewayProtocol(self), zmq.ROUTER)
         #gateway_connect = yield from self.gateway_router.bind("ipc://@/temp/gateway")
-        gateway_connect = yield from self.gateway_router.bind("tcp://*:8888")
         self.gateway_router.setsockopt(zmq.IDENTITY, b"GATEWAY")
+        gateway_connect = yield from self.gateway_router.bind("tcp://*:8888")
         self.logger.info("Gateway bind to %s " % gateway_connect)
         
 
